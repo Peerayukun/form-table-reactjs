@@ -1,24 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import {dataContext, Form } from "./components/form";
+import LocalConnection from "./components/localConnect";
+import Table from "./components/table";
 
 function App() {
+  const [all,setAll] = useState({...localStorage})
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <dataContext.Provider value={{data:all,func:setAll}}>
+        <Form/> 
+        <LocalConnection/>
+        <Table/>
+    </dataContext.Provider>
   );
 }
 
